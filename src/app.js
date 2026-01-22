@@ -16,6 +16,10 @@ app.use(express.json())
 app.use(morgan('dev'))
 app.use(cookieParser())
 
+app.get('/', (req, res) => {
+    return res.send('SVHMS backend is runnning')
+})
+
 app.use('/api/v1/users', userRouter)
 app.use('/api/v1/vehicles', vehicleRouter)
 

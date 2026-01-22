@@ -6,10 +6,12 @@ import userRouter from "./modules/users/user.route.js";
 import vehicleRouter from "./modules/vehicles/vehicle.route.js";
 import "./modules/diagnostics/diagnostic.listeners.js"
 import cookieParser from "cookie-parser";
+import cors from "cors"
 
 const app = express()
 
 // middlewares
+app.use(cors())
 app.use(express.json())
 app.use(morgan('dev'))
 app.use(cookieParser())

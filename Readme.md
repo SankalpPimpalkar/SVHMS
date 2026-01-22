@@ -80,8 +80,3 @@ npm run dev
   <li>Mobile application for real-time alerts and notifications</li>
   <li>Support for additional vehicle makes and advanced sensor integration</li>
 </ul>
-
-<h2>License</h2>
-<p>
-MIT License © 2026
-</p>

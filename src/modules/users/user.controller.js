@@ -1,5 +1,6 @@
 import { UserService } from "./user.service.js";
 import { NODE_ENV } from "../../configs/env.config.js";
+import { dbconnect } from "../../configs/db.config.js";
 
 const COOKIE_OPTIONS = {
     httpOnly: true,
@@ -10,6 +11,7 @@ const COOKIE_OPTIONS = {
 
 export class AuthController {
     static async register(req, res, next) {
+        await dbconnect()
         try {
             const { name, email, password } = req.body;
             const result = await UserService.register(name, email, password);
@@ -25,6 +27,7 @@ export class AuthController {
     }
 
     static async login(req, res, next) {
+        await dbconnect()
         try {
             const { email, password } = req.body;
             const { token, user } = await UserService.login(email, password);
@@ -47,6 +50,7 @@ export class AuthController {
     }
 
     static async getMe(req, res, next) {
+        await dbconnect()
         try {
             const userId = req.user;
             const user = await UserService.getById(userId);

@@ -3,6 +3,7 @@ import { OBDService } from "./obd.service.js";
 
 export class OBDController {
     static async createBulk(req, res, next) {
+                await dbconnect()
         try {
             const userId = req.user;
             const { vehicleId } = req.params;
@@ -25,6 +26,7 @@ export class OBDController {
     }
 
     static async getRecords(req, res, next) {
+                await dbconnect()
         try {
             const userId = req.user;
             const { vehicleId } = req.params;
@@ -58,6 +60,7 @@ export class OBDController {
     }
 
     static async deleteOld(req, res, next) {
+                await dbconnect()
         try {
             const { beforeDate } = req.body;
 

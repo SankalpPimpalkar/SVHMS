@@ -2,6 +2,7 @@ import { VehicleService } from "./vehicle.service.js";
 
 export class VehicleController {
     static async createVehicle(req, res, next) {
+                await dbconnect()
         try {
             const userId = req.user;
             const { manufacturer, model, year, engineType } = req.body;
@@ -14,6 +15,7 @@ export class VehicleController {
     }
 
     static async getVehicles(req, res, next) {
+                await dbconnect()
         try {
             const userId = req.user;
             const vehicles = await VehicleService.getVehiclesByUser(userId);
@@ -24,6 +26,7 @@ export class VehicleController {
     }
 
     static async getVehicleById(req, res, next) {
+                await dbconnect()
         try {
             const userId = req.user;
             const { vehicleId } = req.params;
@@ -36,6 +39,7 @@ export class VehicleController {
     }
 
     static async updateVehicle(req, res, next) {
+                await dbconnect()
         try {
             const userId = req.user;
             const { vehicleId } = req.params;
@@ -49,6 +53,7 @@ export class VehicleController {
     }
 
     static async deleteVehicle(req, res, next) {
+                await dbconnect()
         try {
             const userId = req.user;
             const { vehicleId } = req.params;

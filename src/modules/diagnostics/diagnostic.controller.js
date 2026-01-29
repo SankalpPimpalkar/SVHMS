@@ -2,6 +2,7 @@ import DiagnosticService from "./diagnostic.service.js";
 
 export class DiagnosticController {
     static async getDiagnostics(req, res, next) {
+                await dbconnect()
         try {
             const { vehicleId } = req.params;
             const userId = req.user;

@@ -81,5 +81,5 @@ const obdSchema = new mongoose.Schema({
 
 obdSchema.index({ vehicleId: 1, receivedAt: -1 });
 
-const OBDModel = mongoose.model('OBD', obdSchema);
+const OBDModel = mongoose.models.OBD || mongoose.model('OBD', obdSchema);
 export default OBDModel;

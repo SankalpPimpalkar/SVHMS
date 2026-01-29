@@ -73,5 +73,5 @@ const diagnosticsSchema = new mongoose.Schema({
 
 diagnosticsSchema.index({ vehicleId: 1, "timeWindow.end": -1 });
 
-const DiagnosticsModel = mongoose.model('Diagnostics', diagnosticsSchema);
+const DiagnosticsModel = mongoose.model.Diagnostics || mongoose.model('Diagnostic', diagnosticsSchema);
 export default DiagnosticsModel;

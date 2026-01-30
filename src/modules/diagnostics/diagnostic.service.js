@@ -9,7 +9,7 @@ class DiagnosticService {
         const diagnostics = await DiagnosticsModel
             .find({ vehicle: vehicleId, user: userId })
             .sort({ "timeWindow.end": -1 })
-            .select("-rawOBDIds -__v -vehicle -user")
+            .select("-__v -vehicle -user")
             .lean();
 
         return diagnostics;

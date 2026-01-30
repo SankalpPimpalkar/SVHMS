@@ -4,8 +4,8 @@ import morgan from "morgan";
 import { errorHandler } from "./shared/errors/handler.js";
 import userRouter from "./modules/users/user.route.js";
 import vehicleRouter from "./modules/vehicles/vehicle.route.js";
-import "./modules/diagnostics/diagnostic.listeners.js"
 import cookieParser from "cookie-parser";
+import "./modules/diagnostics/diagnostic.cron.js"
 import cors from "cors"
 
 const app = express()

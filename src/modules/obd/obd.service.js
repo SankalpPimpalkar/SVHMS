@@ -2,6 +2,7 @@ import OBDModel from "./obd.model.js";
 import { BadRequestError } from "../../shared/errors/types.js";
 import VehicleModel from "../vehicles/vehicle.model.js";
 import eventBus from "../../shared/events/EventBus.js";
+import { BatchService } from "../batch/batch.service.js";
 
 export class OBDService {
     static REQUIRED_FIELDS = [
@@ -92,11 +93,13 @@ export class OBDService {
             ordered: false
         });
 
-        eventBus.emit('obd-data:created', {
-            obdRecords: insertedRecords,
-            vehicleId,
-            userId
+        console.log("OBD RECORDS", obdRecords)
+        await BatchService.saveBatches({
+            obdReadings: insertedRecords,
+            userId,
+            vehicleId
         })
+        console.log("Created Batches")
 
         return {
             insertedCount: insertedRecords.length,

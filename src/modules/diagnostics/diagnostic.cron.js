@@ -4,7 +4,7 @@ import DiagnosticsModel from "./diagnostic.model.js";
 import { explainOBDWithLLM } from "../ai/groq.ai.js";
 import { dbconnect } from "../../configs/db.config.js";
 
-async function runDiagnosticJob(intervalMinutes = 5) {
+export default async function runDiagnosticJob(intervalMinutes = 5) {
     console.log(`[CRON] Running ${intervalMinutes}-minute diagnostic batch job`);
     await dbconnect();
 

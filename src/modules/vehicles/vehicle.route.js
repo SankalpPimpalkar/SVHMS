@@ -3,6 +3,7 @@ import authenticate from "../../shared/middlewares/authenticate.js";
 import { VehicleController } from "./vehicle.controller.js";
 import obdRouter from "../obd/obd.routes.js";
 import diagnosticRouter from "../diagnostics/diagnostic.routes.js";
+import baselineRouter from "../baseline/baseline.routes.js";
 
 const vehicleRouter = Router();
 
@@ -14,5 +15,6 @@ vehicleRouter.delete('/:vehicleId', authenticate, VehicleController.deleteVehicl
 
 vehicleRouter.use('/:vehicleId/obd', authenticate, obdRouter)
 vehicleRouter.use('/:vehicleId/diagnostics', authenticate, diagnosticRouter)
+vehicleRouter.use('/:vehicleId/baseline', authenticate, baselineRouter)
 
 export default vehicleRouter;

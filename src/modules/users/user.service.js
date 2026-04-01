@@ -1,10 +1,28 @@
 import bcrypt from "bcrypt";
 import jwt from "jsonwebtoken";
 import UserModel from "./user.model.js";
+import VehicleModel from "../vehicles/vehicle.model.js";
 import { BadRequestError, NotFoundError, UnauthorizedError } from "../../shared/errors/types.js";
 import { JWT_SECRET } from "../../configs/env.config.js";
 
 export class UserService {
+    static async #ensureDefaultVehicle(userId) {
+        const existingVehicle = await VehicleModel.findOne({ user: userId }).select("_id").lean();
+        if (existingVehicle) {
+            return existingVehicle._id;
+        }
+
+        const defaultVehicle = await VehicleModel.create({
+            user: userId,
+            manufacturer: "Generic",
+            model: "Auto-Created",
+            year: new Date().getFullYear(),
+            engineType: "PETROL"
+        });
+
+        return defaultVehicle._id;
+    }
+
     static #issueToken(user) {
         const PAYLOAD = {
             sub: user._id,
@@ -38,6 +56,8 @@ export class UserService {
             auth_provider: 'local'
         });
 
+        await this.#ensureDefaultVehicle(newUser._id);
+
         return this.#issueToken(newUser);
     }
 
@@ -53,6 +73,8 @@ export class UserService {
         if (!valid) {
             throw new UnauthorizedError('Invalid credentials');
         }
+
+        await this.#ensureDefaultVehicle(user._id);
 
         return this.#issueToken(user);
     }
